@@ -214,6 +214,7 @@ class Program
                     {
                         count++;
                         // if index is different from the next index then append
+                        // how to make it show nn instead of n2...? 
                         if (i + 1 >= originalString.Length || originalString[i] != originalString[i + 1])
                         {
                             result += originalString[i];
@@ -221,13 +222,39 @@ class Program
                             {
                                 result += count;
                             }
-                            
                             // reset the duplicate counter
                             count = 0;
                         }
                     }
 
                     Console.WriteLine(result);
+
+                    // decompress
+                    Console.WriteLine("Enter a string to decompress (eg. a5b3c4");
+                    string decompInput = Console.ReadLine().Trim();
+                    char[] characters = new char[decompInput.Length];
+                    characters = decompInput.ToCharArray();
+                    string decompressResult = "";
+
+
+                    for (int i = 0; i < characters.Length; i++)
+                    {
+                        // if the index char has ascii value of chars 1 - 9
+                        if (characters[i] >= 49 && characters[i]<= 57)
+                        {
+                            // .. convert to an int and iterate n amount of times where n = int found
+                            for (int j = 0; j < Int32.Parse(characters[i].ToString()) - 1; j++)
+                            {
+                                decompressResult += characters[i - 1].ToString();
+                            }
+                            
+                        } else
+                        {
+                            decompressResult += characters[i];
+                        }
+                    }
+
+                    Console.WriteLine(decompressResult);
 
                     break;
                 case 3:
