@@ -181,21 +181,23 @@ class Program
                 case 2:
                     // string compressor
                     string testString = "RTFFFFYYUPPPEEEUU";
+                    int count = 0;
+
                     string result = "";
-                    string temp = "";
+                    // use a count to count repeats
 
-                    // change to char array
-                    // iterate through chars
-                    // check if the next iteration is the same char
-                    // if the char is the same, store it in temp
-                    // when the char is different, temp.Length() and concatenate it to a string with the first char
+                    for (int i = 0; i < testString.Length; i++)
+                    {
+                        count++;
+                        if (i + 1 >= testString.Length || testString[i] != testString[i + 1])
+                        {
+                            result += testString[i];
+                            result += count;
+                            count = 0;
+                        }
+                    }
 
-                    // testString ToCharArray()
-                    // for (i = 0; i < chararray.length; i++) {
-                    //      if (chararray[i + 1] == chararray[i] {
-                    //          temp += chararray[i]
-                    //      }  
-                    // }
+                    Console.WriteLine(result);
 
                     break;
                 case 3:
