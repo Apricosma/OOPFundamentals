@@ -100,40 +100,71 @@ class Program
 
                 while (changeNeeded > 0)
                 {
-                    if (20 <= changeNeeded)
+                    switch(changeNeeded)
                     {
-                        StoredCoins["$20"] -= 1;
-                        changeNeeded = changeNeeded - 20;
-                        Output["$20"] += 1;
-                    }
+                        case int n when (20 <= n && StoredCoins["$20"] > 0):
+                            StoredCoins["$20"] -= 1;
+                            changeNeeded = changeNeeded - 20;
+                            Output["$20"] += 1;
+                            break;
+                        case int n when (10 <= n && StoredCoins["$10"] > 0):
+                            StoredCoins["$10"] -= 1;
+                            changeNeeded = changeNeeded - 10;
+                            Output["$10"] += 1;
+                            break;
+                        case int n when (5 <= n && StoredCoins["$5"] > 0):
+                            StoredCoins["$5"] -= 1;
+                            changeNeeded = changeNeeded - 5;
+                            Output["$5"] += 1;
+                            break;
+                        case int n when (2 <= n && StoredCoins["$2"] > 0):
+                            StoredCoins["$2"] -= 1;
+                            changeNeeded = changeNeeded - 2;
+                            Output["$2"] += 1;
+                            break;
+                        case int n when (1 <= n && StoredCoins["$1"] > 0):
+                            StoredCoins["$1"] -= 1;
+                            changeNeeded = changeNeeded - 1;
+                            Output["$1"] += 1;
+                            break;
+                        default:
+                            break;
 
-                    if (10 <= changeNeeded)
-                    {
-                        StoredCoins["$10"] -= 1;
-                        changeNeeded = changeNeeded - 10;
-                        Output["$10"] += 1;
                     }
+                    //if (20 <= changeNeeded)
+                    //{
+                    //    StoredCoins["$20"] -= 1;
+                    //    changeNeeded = changeNeeded - 20;
+                    //    Output["$20"] += 1;
+                    //}
 
-                    if (5 <= changeNeeded)
-                    {
-                        StoredCoins["$5"] -= 1;
-                        changeNeeded = changeNeeded - 5;
-                        Output["$5"] += 1;
-                    }
+                    //if (10 <= changeNeeded)
+                    //{
+                    //    StoredCoins["$10"] -= 1;
+                    //    changeNeeded = changeNeeded - 10;
+                    //    Output["$10"] += 1;
+                    //}
 
-                    if (2 <= changeNeeded)
-                    {
-                        StoredCoins["$2"] -= 1;
-                        changeNeeded = changeNeeded - 2;
-                        Output["$2"] += 1;
-                    }
+                    //if (5 <= changeNeeded)
+                    //{
+                    //    StoredCoins["$5"] -= 1;
+                    //    changeNeeded = changeNeeded - 5;
+                    //    Output["$5"] += 1;
+                    //}
 
-                    if (1 <= changeNeeded)
-                    {
-                        StoredCoins["$1"] -= 1;
-                        changeNeeded = changeNeeded - 1;
-                        Output["$1"] += 1;
-                    }
+                    //if (2 <= changeNeeded)
+                    //{
+                    //    StoredCoins["$2"] -= 1;
+                    //    changeNeeded = changeNeeded - 2;
+                    //    Output["$2"] += 1;
+                    //}
+
+                    //if (1 <= changeNeeded)
+                    //{
+                    //    StoredCoins["$1"] -= 1;
+                    //    changeNeeded = changeNeeded - 1;
+                    //    Output["$1"] += 1;
+                    //}
                 }
 
                 foreach(KeyValuePair<string, int> pair in Output)
