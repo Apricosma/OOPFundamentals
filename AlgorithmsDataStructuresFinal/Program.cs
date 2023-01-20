@@ -58,85 +58,118 @@ class Program
 
     static void Main(string[] args)
     {
-        Dictionary<string, int> StoredCoins = initializeCoins();
-        Dictionary<string, int> StoredProducts = vendingMachineProducts();
+        bool mainProgramRunning = true;
 
-
-        Console.WriteLine("Hello, thank you for choosing vending inc.");
-        printProducts(StoredProducts);
-        Console.WriteLine();
-
-        Console.WriteLine("Please, enter coins . . .");
-        int inputCoins = Int32.Parse(Console.ReadLine());
-
-        Console.WriteLine("Enter the name of the product you'd like to purchase:");
-        string productSelection = Console.ReadLine().ToLower();
-
-        if (StoredProducts.ContainsKey(productSelection))
-        {
-            if (inputCoins > StoredProducts[productSelection])
+        while(mainProgramRunning) {
+            Console.WriteLine("1. Vending Machine 2. String Compressor 3. Quit");
+            int input = Int32.Parse(Console.ReadLine());
+            switch(input)
             {
-                Console.WriteLine($"You recieve 1 {productSelection}");
-                
-                // find the change value ...
-                // check from biggest to smallest if you can match the change value in the lease amount of coins?
-                // if change needed = 0
-                    // no change needed to output
-                // if change needed = 8
-                // does 1 $20 <= 8
-                // 1 $10 <= 8?
-                // 1 $5 <= 8?
-                    // yes, add 1 $5 to change pile, reduce changeNeeded by keyvalue
-                    // repeat 5 <= 3?
-                // 2 <= 3?
-                    //yes, add 1 $2 coin to the output, reduce changeNeeded by keyvalue
-                    // 2 <= 1?
-                // 1 <= 1?
-                    //yes, add 1 $1 coin to output, reduce changeNeeded by keyvalue
-                // change needed = 0, so output
+                case 1:
+                    // VENDOR
+                    #region
+                    Dictionary<string, int> StoredCoins = initializeCoins();
+                    Dictionary<string, int> StoredProducts = vendingMachineProducts();
 
-                int changeNeeded = inputCoins - StoredProducts[productSelection];
-                Dictionary<string, int> Output = outputChangeCoins();
+                    Console.WriteLine("Hello, thank you for choosing vending inc.");
+                    printProducts(StoredProducts);
+                    Console.WriteLine();
 
-                while (changeNeeded > 0)
-                {
-                    switch(changeNeeded)
+                    Console.WriteLine("Please, enter coins . . .");
+                    int inputCoins = 0;
+                    bool validInteger = false;
+                    while(!validInteger)
                     {
-                        case int n when (20 <= n && StoredCoins["$20"] > 0):
-                            StoredCoins["$20"] -= 1;
-                            changeNeeded = changeNeeded - 20;
-                            Output["$20"] += 1;
-                            break;
-                        case int n when (10 <= n && StoredCoins["$10"] > 0):
-                            StoredCoins["$10"] -= 1;
-                            changeNeeded = changeNeeded - 10;
-                            Output["$10"] += 1;
-                            break;
-                        case int n when (5 <= n && StoredCoins["$5"] > 0):
-                            StoredCoins["$5"] -= 1;
-                            changeNeeded = changeNeeded - 5;
-                            Output["$5"] += 1;
-                            break;
-                        case int n when (2 <= n && StoredCoins["$2"] > 0):
-                            StoredCoins["$2"] -= 1;
-                            changeNeeded = changeNeeded - 2;
-                            Output["$2"] += 1;
-                            break;
-                        case int n when (1 <= n && StoredCoins["$1"] > 0):
-                            StoredCoins["$1"] -= 1;
-                            changeNeeded = changeNeeded - 1;
-                            Output["$1"] += 1;
-                            break;
-                        default:
-                            Console.WriteLine("No change needed");
-                            break;
+                        string userInput = Console.ReadLine();
+                        if (int.TryParse(userInput, out inputCoins))
+                        {
+                            validInteger = true;
+                        } else
+                        {
+                            Console.WriteLine("Please use a whole number");
+                        }
                     }
-                }
 
-                foreach(KeyValuePair<string, int> pair in Output)
-                {
-                    Console.WriteLine($"{pair.Key} {pair.Value}".ToString());
-                }
+                    bool vendorRunning = true;
+
+                    while (vendorRunning)
+                    {
+                        Console.WriteLine("Enter the name of the product you'd like to purchase: (q to quit)");
+                        string productSelection = Console.ReadLine().ToLower();
+
+                        if(productSelection == "q")
+                        {
+                            Console.WriteLine($"Returned ${inputCoins}");
+                            inputCoins = 0;
+                            break;
+                        }
+
+                        if (StoredProducts.ContainsKey(productSelection))
+                        {
+                            if (inputCoins >= StoredProducts[productSelection])
+                            {
+                                Console.WriteLine($"You recieve 1 {productSelection}");
+                                int changeNeeded = inputCoins - StoredProducts[productSelection];
+                                Dictionary<string, int> Output = outputChangeCoins();
+
+                                while (changeNeeded > 0)
+                                {
+                                    switch (changeNeeded)
+                                    {
+                                        case int n when (20 <= n && StoredCoins["$20"] > 0):
+                                            StoredCoins["$20"] -= 1;
+                                            changeNeeded = changeNeeded - 20;
+                                            Output["$20"] += 1;
+                                            break;
+                                        case int n when (10 <= n && StoredCoins["$10"] > 0):
+                                            StoredCoins["$10"] -= 1;
+                                            changeNeeded = changeNeeded - 10;
+                                            Output["$10"] += 1;
+                                            break;
+                                        case int n when (5 <= n && StoredCoins["$5"] > 0):
+                                            StoredCoins["$5"] -= 1;
+                                            changeNeeded = changeNeeded - 5;
+                                            Output["$5"] += 1;
+                                            break;
+                                        case int n when (2 <= n && StoredCoins["$2"] > 0):
+                                            StoredCoins["$2"] -= 1;
+                                            changeNeeded = changeNeeded - 2;
+                                            Output["$2"] += 1;
+                                            break;
+                                        case int n when (1 <= n && StoredCoins["$1"] > 0):
+                                            StoredCoins["$1"] -= 1;
+                                            changeNeeded = changeNeeded - 1;
+                                            Output["$1"] += 1;
+                                            break;
+                                        default:
+                                            Console.WriteLine("No change needed");
+                                            break;
+                                    }
+                                }
+                                
+
+                                foreach (KeyValuePair<string, int> pair in Output)
+                                {
+                                    if (pair.Value > 0)
+                                    {
+                                        Console.WriteLine($"{pair.Key}: {pair.Value}".ToString());
+                                    }
+                                }
+
+                                inputCoins = inputCoins - StoredProducts[productSelection];
+                                Console.WriteLine($"You have: ${inputCoins}");
+                            }
+                            
+                        }
+                    }
+                    #endregion
+                    break;
+                case 2:
+                    // string compressor
+                    break;
+                case 3:
+                    // quit
+                    break;
             }
         }
     }
