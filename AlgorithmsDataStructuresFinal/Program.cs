@@ -55,6 +55,7 @@ class Program
     }
 
 
+
     static void Main(string[] args)
     {
         Dictionary<string, int> StoredCoins = initializeCoins();
@@ -95,7 +96,6 @@ class Program
                 // change needed = 0, so output
 
                 int changeNeeded = inputCoins - StoredProducts[productSelection];
-                int changePile = 0;
                 Dictionary<string, int> Output = outputChangeCoins();
 
                 while (changeNeeded > 0)
@@ -128,48 +128,14 @@ class Program
                             Output["$1"] += 1;
                             break;
                         default:
+                            Console.WriteLine("No change needed");
                             break;
-
                     }
-                    //if (20 <= changeNeeded)
-                    //{
-                    //    StoredCoins["$20"] -= 1;
-                    //    changeNeeded = changeNeeded - 20;
-                    //    Output["$20"] += 1;
-                    //}
-
-                    //if (10 <= changeNeeded)
-                    //{
-                    //    StoredCoins["$10"] -= 1;
-                    //    changeNeeded = changeNeeded - 10;
-                    //    Output["$10"] += 1;
-                    //}
-
-                    //if (5 <= changeNeeded)
-                    //{
-                    //    StoredCoins["$5"] -= 1;
-                    //    changeNeeded = changeNeeded - 5;
-                    //    Output["$5"] += 1;
-                    //}
-
-                    //if (2 <= changeNeeded)
-                    //{
-                    //    StoredCoins["$2"] -= 1;
-                    //    changeNeeded = changeNeeded - 2;
-                    //    Output["$2"] += 1;
-                    //}
-
-                    //if (1 <= changeNeeded)
-                    //{
-                    //    StoredCoins["$1"] -= 1;
-                    //    changeNeeded = changeNeeded - 1;
-                    //    Output["$1"] += 1;
-                    //}
                 }
 
                 foreach(KeyValuePair<string, int> pair in Output)
                 {
-                    Console.WriteLine($"{pair.Key} {pair.Value}");
+                    Console.WriteLine($"{pair.Key} {pair.Value}".ToString());
                 }
             }
         }
