@@ -86,6 +86,7 @@ class Program
                     printProducts(StoredProducts);
                     Console.WriteLine();
 
+                    // coin input
                     Console.WriteLine("Please, enter coins . . .");
                     int inputCoins = 0;
                     bool validInteger = false;
@@ -116,11 +117,13 @@ class Program
                     } else {
                         bool vendorRunning = true;
 
+                        // main vendor loop
                         while (vendorRunning)
                         {
                             Console.WriteLine("Enter the name of the product you'd like to purchase: (q to quit)");
                             string productSelection = Console.ReadLine().ToLower();
 
+                            // quit
                             if(productSelection == "q")
                             {
                                 Console.WriteLine($"Returned ${inputCoins}");
@@ -128,6 +131,7 @@ class Program
                                 break;
                             }
 
+                            // change logic
                             if (StoredProducts.ContainsKey(productSelection))
                             {
                                 if (inputCoins >= StoredProducts[productSelection])
