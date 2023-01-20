@@ -78,6 +78,9 @@ class Program
             {
                 case 1:
                     // VENDOR
+                    // Complexity should be O(n), even the most intensive algorithm which is the change algorithm
+                    // doesn't compare everything to each other. It just iterates down the list repeatedly
+                    // until it runs out of stuff or reaches the result
                     #region
                     Dictionary<string, int> StoredCoins = initializeCoins();
                     Dictionary<string, int> StoredProducts = vendingMachineProducts();
@@ -199,6 +202,8 @@ class Program
                 case 2:
                     #region
                     // string compressor
+                    // O(n) time complexity
+                    // I only check each index once
 
                     Console.WriteLine("Please enter a string of letters, ignoring spaces");
                     string originalString = Console.ReadLine()
@@ -238,6 +243,8 @@ class Program
                     Console.WriteLine(result);
 
                     // decompress
+                    // I think this is O(n) even though there is a nested for, because the amount of sub-iterations
+                    // is only equal to the integer it finds
                     Console.WriteLine("Enter a string to decompress (eg. a5b3c4)");
                     string decompInput = Console.ReadLine().Trim();
                     char[] characters = new char[decompInput.Length];
