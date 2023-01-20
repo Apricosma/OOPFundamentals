@@ -1,4 +1,6 @@
 ﻿
+using System.Text.RegularExpressions;
+
 class Program
 {
     static Dictionary<string, int> initializeCoins()
@@ -52,6 +54,15 @@ class Program
         Change.Add("1", 0);
 
         return Change;
+    }
+
+    static bool isStringValid(string input)
+    {
+        if (!string.IsNullOrEmpty(input) && !Regex.IsMatch(input, @"^[A-Z]+$"))
+        {
+            return true;
+        }
+        return false;
     }
 
 
@@ -180,19 +191,32 @@ class Program
                     break;
                 case 2:
                     // string compressor
-                    string testString = "RTFFFFYYUPPPEEEUU";
+
+                    Console.WriteLine("Please enter a string of letters, ignoring spaces");
+                    string originalString = Console.ReadLine()
+                        .ToUpper()
+                        .Trim()
+                        .Replace(" ", "");
+
+                    while (isStringValid(originalString))
+                    {
+                        Console.WriteLine("Invalid input, please input a string");
+                        originalString = Console.ReadLine();
+                    }
+
+                    
                     int count = 0;
 
                     string result = "";
                     // use a count to count repeats
 
-                    for (int i = 0; i < testString.Length; i++)
+                    for (int i = 0; i < originalString.Length; i++)
                     {
                         count++;
                         // if index is different from the next index then append
-                        if (i + 1 >= testString.Length || testString[i] != testString[i + 1])
+                        if (i + 1 >= originalString.Length || originalString[i] != originalString[i + 1])
                         {
-                            result += testString[i];
+                            result += originalString[i];
                             if (count > 1) 
                             {
                                 result += count;
@@ -208,6 +232,7 @@ class Program
                     break;
                 case 3:
                     // quit
+                    mainProgramRunning = false;
                     break;
             }
         }
