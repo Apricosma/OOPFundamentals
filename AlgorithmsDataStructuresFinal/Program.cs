@@ -14,29 +14,58 @@ class Program
         return makeCoins;
     }
 
-    static Dictionary<string, double> vendingMachineProducts()
+    static void printStoredCoins(Dictionary<string, int> coins)
+    {
+        foreach (KeyValuePair<string, int> pair in coins)
+        {
+            Console.WriteLine($"{pair.Key} : {pair.Value}");
+        }
+    }
+
+    static Dictionary<string, int> vendingMachineProducts()
     {
         // product: $price
-        Dictionary<string, double> Products = new Dictionary<string, double>();
-        Products.Add("Skittles", 2);
-        Products.Add("Jollyrancher", 3);
-        Products.Add("Mars", 2);
-        Products.Add("Sodiepop", 4);
+        Dictionary<string, int> Products = new Dictionary<string, int>();
+        Products.Add("skittles", 2);
+        Products.Add("jollyrancher", 3);
+        Products.Add("mars", 2);
+        Products.Add("sodiepop", 4);
 
         return Products;
+    }
+
+    static void printProducts(Dictionary<string, int> products)
+    {
+        foreach(KeyValuePair<string, int> pair in products)
+        {
+            Console.WriteLine($"{pair.Key}: ${pair.Value}");
+        }
     }
 
 
     static void Main(string[] args)
     {
         Dictionary<string, int> StoredCoins = initializeCoins();
-        Dictionary<string, double> StoredProducts = vendingMachineProducts();
+        Dictionary<string, int> StoredProducts = vendingMachineProducts();
 
-        
 
-        foreach(KeyValuePair<string, int> pair in StoredCoins)
+        Console.WriteLine("Hello, thank you for choosing vending inc.");
+        printProducts(StoredProducts);
+        Console.WriteLine();
+
+        Console.WriteLine("Please, enter coins . . .");
+        int inputCoins = Int32.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter the name of the product you'd like to purchase:");
+        string productSelection = Console.ReadLine().ToLower();
+
+        if (StoredProducts.ContainsKey(productSelection))
         {
-            Console.WriteLine($"{pair.Key} : {pair.Value}");
+            if (inputCoins > StoredCoins[productSelection])
+            {
+                Console.WriteLine($"You recieve 1 {productSelection}");
+                
+            }
         }
     }
 }
