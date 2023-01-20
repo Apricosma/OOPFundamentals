@@ -66,8 +66,68 @@ class Program
                 Console.WriteLine($"You recieve 1 {productSelection}");
                 
                 // find the change value ...
-                inputCoins -= StoredProducts[productSelection];
-                Console.WriteLine(inputCoins);
+                // check from biggest to smallest if you can match the change value in the lease amount of coins?
+                // if change needed = 0
+                    // no change needed to output
+                // if change needed = 8
+                // does 1 $20 <= 8
+                // 1 $10 <= 8?
+                // 1 $5 <= 8?
+                    // yes, add 1 $5 to change pile, reduce changeNeeded by keyvalue
+                    // repeat 5 <= 3?
+                // 2 <= 3?
+                    //yes, add 1 $2 coin to the output, reduce changeNeeded by keyvalue
+                    // 2 <= 1?
+                // 1 <= 1?
+                    //yes, add 1 $1 coin to output, reduce changeNeeded by keyvalue
+                // change needed = 0, so output
+
+                int changeNeeded = inputCoins - StoredProducts[productSelection];
+                int changePile = 0;
+                Dictionary<string, int> Output = new Dictionary<string, int>();
+
+                while (changeNeeded > 0)
+                {
+                    if (20 <= changeNeeded)
+                    {
+                        StoredCoins["$20"] -= 1;
+                        changeNeeded = changeNeeded - 20;
+                        Output.Add("$20", 1);
+                    }
+
+                    if (10 <= changeNeeded)
+                    {
+                        StoredCoins["$10"] -= 1;
+                        changeNeeded = changeNeeded - 10;
+                        Output.Add("$10", 1);
+                    }
+
+                    if (5 <= changeNeeded)
+                    {
+                        StoredCoins["$5"] -= 1;
+                        changeNeeded = changeNeeded - 5;
+                        Output.Add("$5", 1);
+                    }
+
+                    if (2 <= changeNeeded)
+                    {
+                        StoredCoins["$2"] -= 1;
+                        changeNeeded = changeNeeded - 2;
+                        Output.Add("$2", 1);
+                    }
+
+                    if (1 <= changeNeeded)
+                    {
+                        StoredCoins["$1"] -= 1;
+                        changeNeeded = changeNeeded - 1;
+                        Output.Add("$1", 1);
+                    }
+                }
+
+                foreach(KeyValuePair<string, int> pair in Output)
+                {
+                    Console.WriteLine($"{pair.Key} {pair.Value}");
+                }
             }
         }
     }
