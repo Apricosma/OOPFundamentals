@@ -180,6 +180,23 @@ class Program
                     break;
                 case 2:
                     // string compressor
+                    string testString = "RTFFFFYYUPPPEEEUU";
+                    string result = "";
+                    string temp = "";
+
+                    // change to char array
+                    // iterate through chars
+                    // check if the next iteration is the same char
+                    // if the char is the same, store it in temp
+                    // when the char is different, temp.Length() and concatenate it to a string with the first char
+
+                    // testString ToCharArray()
+                    // for (i = 0; i < chararray.length; i++) {
+                    //      if (chararray[i + 1] == chararray[i] {
+                    //          temp += chararray[i]
+                    //      }  
+                    // }
+
                     break;
                 case 3:
                     // quit
