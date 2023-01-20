@@ -61,10 +61,13 @@ class Program
 
         if (StoredProducts.ContainsKey(productSelection))
         {
-            if (inputCoins > StoredCoins[productSelection])
+            if (inputCoins > StoredProducts[productSelection])
             {
                 Console.WriteLine($"You recieve 1 {productSelection}");
                 
+                // find the change value ...
+                inputCoins -= StoredProducts[productSelection];
+                Console.WriteLine(inputCoins);
             }
         }
     }
