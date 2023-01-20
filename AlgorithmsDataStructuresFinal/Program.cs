@@ -182,6 +182,9 @@ class Program
 
                                     inputCoins = inputCoins - StoredProducts[productSelection];
                                     Console.WriteLine($"You have: ${inputCoins}");
+                                } else
+                                {
+                                    Console.WriteLine("You do not have enough coins to purchase this item");
                                 }
                             
                             }
@@ -190,6 +193,7 @@ class Program
                     #endregion
                     break;
                 case 2:
+                    #region
                     // string compressor
 
                     Console.WriteLine("Please enter a string of letters, ignoring spaces");
@@ -230,13 +234,13 @@ class Program
                     Console.WriteLine(result);
 
                     // decompress
-                    Console.WriteLine("Enter a string to decompress (eg. a5b3c4");
+                    Console.WriteLine("Enter a string to decompress (eg. a5b3c4)");
                     string decompInput = Console.ReadLine().Trim();
                     char[] characters = new char[decompInput.Length];
                     characters = decompInput.ToCharArray();
                     string decompressResult = "";
 
-
+                    // doesn't yet work for compression values over 9
                     for (int i = 0; i < characters.Length; i++)
                     {
                         // if the index char has ascii value of chars 1 - 9
@@ -255,7 +259,7 @@ class Program
                     }
 
                     Console.WriteLine(decompressResult);
-
+                    #endregion
                     break;
                 case 3:
                     // quit
