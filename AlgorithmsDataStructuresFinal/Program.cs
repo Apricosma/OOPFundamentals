@@ -14,10 +14,25 @@ class Program
         return makeCoins;
     }
 
+    static Dictionary<string, double> vendingMachineProducts()
+    {
+        // product: $price
+        Dictionary<string, double> Products = new Dictionary<string, double>();
+        Products.Add("Skittles", 2);
+        Products.Add("Jollyrancher", 3);
+        Products.Add("Mars", 2);
+        Products.Add("Sodiepop", 4);
+
+        return Products;
+    }
+
 
     static void Main(string[] args)
     {
         Dictionary<string, int> StoredCoins = initializeCoins();
+        Dictionary<string, double> StoredProducts = vendingMachineProducts();
+
+        
 
         foreach(KeyValuePair<string, int> pair in StoredCoins)
         {
