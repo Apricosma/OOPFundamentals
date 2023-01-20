@@ -241,6 +241,9 @@ class Program
                     string decompressResult = "";
 
                     // doesn't yet work for compression values over 9
+                    // since it only looks at 1 number at a time, I'm unsure how to do this
+                    // maybe.. if ascii = number, peek the next char, and if the next char is also an ascii number, then add them together into an iterator
+                    // and run the for j loop by the iterator amount, rather than directly from the digit found?
                     for (int i = 0; i < characters.Length; i++)
                     {
                         // if the index char has ascii value of chars 1 - 9
