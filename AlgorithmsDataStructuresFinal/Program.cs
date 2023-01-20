@@ -189,10 +189,13 @@ class Program
                     for (int i = 0; i < testString.Length; i++)
                     {
                         count++;
+                        // if index is different from the next index then append
                         if (i + 1 >= testString.Length || testString[i] != testString[i + 1])
                         {
+                            // append the letter and the number
                             result += testString[i];
                             result += count;
+                            // reset the duplicate counter
                             count = 0;
                         }
                     }
