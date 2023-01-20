@@ -42,6 +42,18 @@ class Program
         }
     }
 
+    static Dictionary<string, int> outputChangeCoins()
+    {
+        Dictionary<string, int> Change = new Dictionary<string, int>();
+        Change.Add("$20", 0);
+        Change.Add("$10", 0);
+        Change.Add("$5", 0);
+        Change.Add("$2", 0);
+        Change.Add("$1", 0);
+
+        return Change;
+    }
+
 
     static void Main(string[] args)
     {
@@ -84,7 +96,7 @@ class Program
 
                 int changeNeeded = inputCoins - StoredProducts[productSelection];
                 int changePile = 0;
-                Dictionary<string, int> Output = new Dictionary<string, int>();
+                Dictionary<string, int> Output = outputChangeCoins();
 
                 while (changeNeeded > 0)
                 {
@@ -92,35 +104,35 @@ class Program
                     {
                         StoredCoins["$20"] -= 1;
                         changeNeeded = changeNeeded - 20;
-                        Output.Add("$20", 1);
+                        Output["$20"] += 1;
                     }
 
                     if (10 <= changeNeeded)
                     {
                         StoredCoins["$10"] -= 1;
                         changeNeeded = changeNeeded - 10;
-                        Output.Add("$10", 1);
+                        Output["$10"] += 1;
                     }
 
                     if (5 <= changeNeeded)
                     {
                         StoredCoins["$5"] -= 1;
                         changeNeeded = changeNeeded - 5;
-                        Output.Add("$5", 1);
+                        Output["$5"] += 1;
                     }
 
                     if (2 <= changeNeeded)
                     {
                         StoredCoins["$2"] -= 1;
                         changeNeeded = changeNeeded - 2;
-                        Output.Add("$2", 1);
+                        Output["$2"] += 1;
                     }
 
                     if (1 <= changeNeeded)
                     {
                         StoredCoins["$1"] -= 1;
                         changeNeeded = changeNeeded - 1;
-                        Output.Add("$1", 1);
+                        Output["$1"] += 1;
                     }
                 }
 
