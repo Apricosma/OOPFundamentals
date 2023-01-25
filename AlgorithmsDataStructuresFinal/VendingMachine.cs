@@ -60,5 +60,36 @@ namespace AlgorithmsDataStructuresFinal
                 Console.WriteLine($"{moneyDenomination} is not a proper coin, please enter 20, 10, 5, 2, or 1");
             }
         }
+
+        public void VendItem(string code, int money) 
+        {
+            int change = 0;
+            Product product = null;
+
+            foreach (KeyValuePair<Product, int> item in Inventory)
+            {
+                if (item.Key.Code == code)
+                {
+                    product = item.Key;
+                    change = money - item.Key.Price;
+                    break;
+                }
+            }
+
+            if (product != null && money >= product.Price) 
+            {
+                foreach(KeyValuePair<int, int> pair in MoneyFloat)
+                {
+                    while(pair.Key <= change && MoneyFloat[pair.Key] > 0 && change > 0)
+                    {
+                        change -= pair.Key;
+                        Console.WriteLine($"Returning {pair.Key}");
+
+                        MoneyFloat[pair.Key]--;
+                        
+                    }
+                }
+            }
+        }
     }
 }

@@ -30,12 +30,12 @@ namespace AlgorithmsDataStructuresFinal
             vendor.StockItem(mars, 1);
             vendor.StockItem(coke, 1);
 
-            vendor.StockFloat(20, 1);
-
             foreach (var product in vendor.Inventory)
             {
                 Console.WriteLine($"{product.Key.Name}: {product.Value}");
             }
+
+            vendor.VendItem("A1", 20);
         }
     }
 }
