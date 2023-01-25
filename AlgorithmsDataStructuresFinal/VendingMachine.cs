@@ -9,6 +9,7 @@ namespace AlgorithmsDataStructuresFinal
     internal class VendingMachine
     {
         private int _serialNumber;
+        public int SerialNumber { get { return _serialNumber; } }
 
         private Dictionary<int, int> _moneyFloat;
         public Dictionary<int, int> MoneyFloat { 
