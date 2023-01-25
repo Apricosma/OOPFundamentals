@@ -81,6 +81,7 @@ namespace AlgorithmsDataStructuresFinal
             if (Inventory[product] <= 0 )
             {
                 Console.WriteLine($"{product.Name} is out of stock. Please choose another");
+                Console.WriteLine($"Returned ${money}");
             } else if (product != null && money >= product.Price) 
             {
                 Console.WriteLine($"Vending {product.Name}...");
@@ -97,6 +98,10 @@ namespace AlgorithmsDataStructuresFinal
                         
                     }
                 }
+            } else
+            {
+                Console.WriteLine("Not enough money, please choose another");
+                Console.WriteLine($"Returned ${money}");
             }
         }
     }

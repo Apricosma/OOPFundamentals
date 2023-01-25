@@ -54,53 +54,70 @@ namespace AlgorithmsDataStructuresFinal
                     }
                 }
 
-                Console.WriteLine("Please choose a yummy snack with its corresponding key (eg. A2) or 'Q' to quit");
-                foreach (var product in vendor.Inventory)
+                int keyValueSum = 0;
+                foreach (KeyValuePair<int, int> pair in vendor.MoneyFloat)
                 {
-                    Console.WriteLine($"{product.Key.Code} | {product.Key.Name}: ${product.Key.Price} (Qty: {product.Value})");
+                    int key = pair.Key;
+                    keyValueSum += key * pair.Value;
                 }
 
-                string productCode = "";
-                while (true)
+                if (keyValueSum < inputMoney)
                 {
-                    try
+                    Console.WriteLine("Sorry, we don't have enough change available to perform this transaction");
+                    Console.WriteLine($"Returned ${inputMoney}");
+                    inputMoney = 0;
+                } else
+                {
+                    Console.WriteLine("Please choose a yummy snack with its corresponding key (eg. A2) or 'Q' to quit");
+                    foreach (var product in vendor.Inventory)
                     {
-                        productCode = Console.ReadLine().ToUpper();
-                        if (productCode == "Q")
+                        Console.WriteLine($"{product.Key.Code} | {product.Key.Name}: ${product.Key.Price} (Qty: {product.Value})");
+                    }
+
+                    string productCode = "";
+                    while (true)
+                    {
+                        try
                         {
-                            Console.WriteLine($"Returned ${inputMoney}");
+                            productCode = Console.ReadLine().ToUpper();
+                            if (productCode == "Q")
+                            {
+                                Console.WriteLine($"Returned ${inputMoney}");
+                                Environment.Exit(0);
+                            }
+
+                            if (productCode.Length != 2)
+                            {
+                                throw new Exception("Invalid, please input the code of the product (eg. A2, B1)");
+                            }
+
+                            char firstCharacter = productCode[0];
+                            if (!Char.IsLetter(firstCharacter))
+                            {
+                                throw new Exception("Invalid format, the first character should be a letter");
+                            }
+                            if (!Char.IsDigit(productCode[1]))
+                            {
+                                throw new Exception("Invalid format, the second character should be a number");
+                            }
                             break;
                         }
-
-                        if (productCode.Length != 2)
+                        catch (Exception ex)
                         {
-                            throw new Exception("Invalid, please input the code of the product (eg. A2, B1)");
+                            Console.WriteLine(ex.Message);
                         }
-
-                        char firstCharacter = productCode[0];
-                        if (!Char.IsLetter(firstCharacter))
-                        {
-                            throw new Exception("Invalid format, the first character should be a letter");
-                        }
-                        if (!Char.IsDigit(productCode[1]))
-                        {
-                            throw new Exception("Invalid format, the second character should be a number");
-                        }
-                        break;
                     }
-                    catch (Exception ex)
+
+                    foreach (KeyValuePair<Product, int> product in vendor.Inventory)
                     {
-                        Console.WriteLine(ex.Message);
+                        if (product.Key.Code == productCode)
+                        {
+                            vendor.VendItem(productCode, inputMoney);
+                        }
                     }
                 }
 
-                foreach (KeyValuePair<Product, int> product in vendor.Inventory)
-                {
-                    if (product.Key.Code == productCode)
-                    {
-                        vendor.VendItem(productCode, inputMoney);
-                    }
-                }
+                
             }
 
             
