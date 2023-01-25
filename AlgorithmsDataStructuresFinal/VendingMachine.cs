@@ -48,7 +48,12 @@ namespace AlgorithmsDataStructuresFinal
             if (MoneyFloat.ContainsKey(moneyDenomination))
             {
                 MoneyFloat[moneyDenomination] += quantity;
-                Console.WriteLine($"{quantity} ${moneyDenomination} added to the machine's float");
+                Console.WriteLine($"{quantity} ${moneyDenomination} coin added to the machine's float");
+                
+                foreach(KeyValuePair<int, int> coin in MoneyFloat)
+                {
+                    Console.WriteLine($"${coin.Key} qty: {coin.Value}");
+                }
             }
             else 
             {
