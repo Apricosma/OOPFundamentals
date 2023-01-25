@@ -77,14 +77,21 @@ namespace AlgorithmsDataStructuresFinal
                 }
             }
 
-            if (product != null && money >= product.Price) 
+
+            if (Inventory[product] <= 0 )
             {
+                Console.WriteLine($"{product.Name} is out of stock. Please choose another");
+            } else if (product != null && money >= product.Price) 
+            {
+                Console.WriteLine($"Vending {product.Name}...");
+                Console.WriteLine("Your change is: ");
+                Inventory[product]--;
                 foreach(KeyValuePair<int, int> pair in MoneyFloat)
                 {
                     while(pair.Key <= change && MoneyFloat[pair.Key] > 0 && change > 0)
                     {
                         change -= pair.Key;
-                        Console.WriteLine($"Returning {pair.Key}");
+                        Console.WriteLine($"Returning ${pair.Key}");
 
                         MoneyFloat[pair.Key]--;
                         

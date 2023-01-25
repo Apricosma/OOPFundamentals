@@ -33,72 +33,77 @@ namespace AlgorithmsDataStructuresFinal
 
             Console.WriteLine($"Starting vendor.. Serial No. {vendor.SerialNumber}");
             Console.WriteLine("-----------------------------------------------");
+
+            bool programRunning = true;
+            while (programRunning)
+            {
+                int inputMoney = 0;
+                bool validMoneyInput = false;
+
+                while (!validMoneyInput)
+                {
+                    Console.WriteLine("Please input money: ");
+                    try
+                    {
+                        inputMoney = Int32.Parse(Console.ReadLine());
+                        validMoneyInput = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Please input a whole number");
+                    }
+                }
+
+                Console.WriteLine("Please choose a yummy snack with its corresponding key (eg. A2) or 'Q' to quit");
+                foreach (var product in vendor.Inventory)
+                {
+                    Console.WriteLine($"{product.Key.Code} | {product.Key.Name}: ${product.Key.Price} (Qty: {product.Value})");
+                }
+
+                string productCode = "";
+                while (true)
+                {
+                    try
+                    {
+                        productCode = Console.ReadLine().ToUpper();
+                        if (productCode == "Q")
+                        {
+                            Console.WriteLine($"Returned ${inputMoney}");
+                            break;
+                        }
+
+                        if (productCode.Length != 2)
+                        {
+                            throw new Exception("Invalid, please input the code of the product (eg. A2, B1)");
+                        }
+
+                        char firstCharacter = productCode[0];
+                        if (!Char.IsLetter(firstCharacter))
+                        {
+                            throw new Exception("Invalid format, the first character should be a letter");
+                        }
+                        if (!Char.IsDigit(productCode[1]))
+                        {
+                            throw new Exception("Invalid format, the second character should be a number");
+                        }
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+
+                foreach (KeyValuePair<Product, int> product in vendor.Inventory)
+                {
+                    if (product.Key.Code == productCode)
+                    {
+                        vendor.VendItem(productCode, inputMoney);
+                    }
+                }
+            }
+
             
-
-            int inputMoney = 0;
-            bool validMoneyInput = false;
-
-            while (!validMoneyInput)
-            {
-                Console.WriteLine("Please input money: ");
-                try
-                {
-                    inputMoney = Int32.Parse(Console.ReadLine());
-                    validMoneyInput = true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Please input a whole number");
-                }
-            }
-
-            Console.WriteLine("Please choose a yummy snack with its corresponding key (eg. A2)");
-            foreach (var product in vendor.Inventory)
-            {
-                Console.WriteLine($"{product.Key.Code} | {product.Key.Name}: {product.Value}");
-            }
-
-            string productCode = "";
-            while (true)
-            {
-                try
-                {
-                    productCode = Console.ReadLine();
-                    if (productCode.Length != 2)
-                    {
-                        throw new Exception("Invalid, please input the code of the product (eg. A2, B1)");
-                    }
-
-                    char firstCharacter = productCode[0];
-                    if (!Char.IsLetter(firstCharacter))
-                    {
-                        throw new Exception("Invalid format, the first character should be a letter");
-                    }
-                    if (!Char.IsDigit(productCode[1])) 
-                    {
-                        throw new Exception("Invalid format, the second character should be a number");
-                    }
-                    break;
-                }
-                catch(Exception ex) 
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-
-            foreach (KeyValuePair<Product, int> product in vendor.Inventory)
-            {
-                if (product.Key.Code == productCode)
-                {
-                    vendor.VendItem(productCode, inputMoney);
-                }
-            }
-
-
-            
-
-            vendor.VendItem("A1", 20);
-
         }
     }
 }
