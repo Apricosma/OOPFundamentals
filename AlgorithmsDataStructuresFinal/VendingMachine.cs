@@ -30,11 +30,14 @@ namespace AlgorithmsDataStructuresFinal
             if (Inventory.ContainsKey(product))
             {
                 Inventory[product] += quantity;
+                //return $"{product.Name}, Code: {product.Code}, ${product.Price} added to stock. Current qty: {Inventory[product]}";
             }
             else
             {
                 Inventory.Add(product, quantity);
             }
+
+            Console.WriteLine($"{product.Name}, {product.Code}, ${product.Price} stocked. Current qty: {Inventory[product]}");
         }
     }
 }

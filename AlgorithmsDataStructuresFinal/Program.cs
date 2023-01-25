@@ -17,17 +17,16 @@ namespace AlgorithmsDataStructuresFinal
                 { 1, 9 }
             };
 
+            // initial stock
             Product mars = new Product("Mars", 4, "A1");
             Product coke = new Product("Coke", 5, "A2");
-            var products = new Dictionary<Product, int>()
+            Dictionary<Product, int> products = new Dictionary<Product, int>()
             {
                 { mars, 4 },
                 { coke, 3 }
             };
 
-            
             VendingMachine vendor = new VendingMachine(1234, initialMoneyFloat, products);
-
             vendor.StockItem(mars, 1);
             vendor.StockItem(coke, 1);
 
