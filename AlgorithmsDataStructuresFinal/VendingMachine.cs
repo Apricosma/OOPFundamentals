@@ -27,7 +27,14 @@ namespace AlgorithmsDataStructuresFinal
 
         public void StockItem(Product product, int quantity)
         {
-            Inventory.Add(product, quantity);
+            if (Inventory.ContainsKey(product))
+            {
+                Inventory[product] += quantity;
+            }
+            else
+            {
+                Inventory.Add(product, quantity);
+            }
         }
     }
 }

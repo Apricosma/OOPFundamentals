@@ -25,8 +25,11 @@ namespace AlgorithmsDataStructuresFinal
 
             
             VendingMachine vendor = new VendingMachine(1234, initialMoneyFloat, products);
-            
-            foreach(var product in products)
+
+            vendor.StockItem(new Product("Mars", 4, "A1"), 1);
+            vendor.StockItem(new Product("Mars", 4, "A1"), 1);
+
+            foreach (var product in vendor.Inventory)
             {
                 Console.WriteLine($"{product.Key.Name}: {product.Value}");
             }
