@@ -1,11 +1,11 @@
-﻿using Lab2;
+﻿using CarparkDemo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolManagementDemo
+namespace CarparkDemo
 {
     // ParkingSpot tracks the relationship between Vehicles and CarParks
     // many-to-many relationship

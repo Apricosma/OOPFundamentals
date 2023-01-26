@@ -1,11 +1,12 @@
-﻿using Lab2;
+﻿using CarparkDemo;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolManagementDemo
+namespace CarparkDemo
 {
     public class CarPark
     {
@@ -54,10 +55,42 @@ namespace SchoolManagementDemo
             }
         }
         private int _spotCount = 1;
+
+        public void ParkVehicle(Vehicle vehicle, CarPark carPark)
+        {
+
+            foreach (ParkingSpot parkingSpot in _parkingSpots)
+            {
+                if (parkingSpot.Vehicle == null)
+                {
+                    parkingSpot.Vehicle = vehicle;
+                    Console.WriteLine($"{vehicle.LicenseNumber} parked");
+                    return;
+                }
+            }
+            throw new Exception("All parking spots are full");
+            // target the index of the hashset, not the hashset
+            //carPark._parkingSpots.Vehicle = vehicle;
+
+        }
+
+        public void RemoveVehicle(Vehicle vehicle)
+        {
+            foreach (ParkingSpot parkingSpot in _parkingSpots)
+            {
+                if (vehicle.LicenseNumber == parkingSpot.Vehicle.LicenseNumber) // causes a crash and I'm not sure why?
+                {
+                    parkingSpot.Vehicle = null;
+                    Console.WriteLine($"Vehicle {vehicle.LicenseNumber} removed from car park");
+                }
+            }
+            throw new Exception($"Vehicle with {vehicle.LicenseNumber} was not found in the car park");
+        }
+
         public CarPark(int capacity)
         {
             _setCapacity(capacity);
-            //_initializeEmptySpots();
+            _initializeEmptySpots();
         }
     }
 }
