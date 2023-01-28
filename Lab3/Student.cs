@@ -8,8 +8,6 @@ using System.Xml.Linq;
 
 namespace SchoolManagementDemo
 {
-    
-
     public class Student
     {
         private int _studentId;
@@ -84,13 +82,6 @@ namespace SchoolManagementDemo
         { 
             get { return _registrationDate; }
             set { _registrationDate = value; }
-        }
-
-        private Enrolment Enrolment{ get; set; }
-        private HashSet<Enrolment> _enrolments = new HashSet<Enrolment>();
-        public void setEnrolment(Student student)
-        {
-            _enrolments.Add(Enrolment);
         }
 
         // *** CONSTRUCTORS ***

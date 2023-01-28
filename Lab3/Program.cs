@@ -57,7 +57,6 @@ namespace SchoolManagementDemo
                     // enrollment stores all the values as its own class
                     Enrolment enrolment = new Enrolment(student, student.StudentId, course);
                     Enrolments.Add(enrolment);
-                    student.setEnrolment(student);
                 }
                 else
                 {
