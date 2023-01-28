@@ -55,10 +55,10 @@ namespace SchoolManagementDemo
         // many students can each take one course
         public Course Course { get; set; }
 
-        private int? _courseGrade;
+        private double? _courseGrade;
 
-        public int? CourseGrade { get { return _courseGrade; } }
-        public void setCourseGrade(int grade)
+        public double? CourseGrade { get { return _courseGrade; } }
+        public void setCourseGrade(double grade)
         {
             if (Course == null )
             {
@@ -84,6 +84,13 @@ namespace SchoolManagementDemo
         { 
             get { return _registrationDate; }
             set { _registrationDate = value; }
+        }
+
+        private Enrolment Enrolment{ get; set; }
+        private HashSet<Enrolment> _enrolments = new HashSet<Enrolment>();
+        public void setEnrolment(Student student)
+        {
+            _enrolments.Add(Enrolment);
         }
 
         // *** CONSTRUCTORS ***

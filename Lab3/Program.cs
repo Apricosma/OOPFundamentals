@@ -17,16 +17,22 @@ namespace SchoolManagementDemo
     {
         public static void Main(string[] args)
         {
+            HashSet<Enrolment> Enrolments = new HashSet<Enrolment>();
+
             Course Software = new Course(200, "Software Developer", 30);
             Student Jimmy = new Student(1000);
-            Student Tim = new Student(2000);
+            Student Tim = new Student(2000, "Tim", "Smith");
+
             Jimmy.FirstName = "Jimmy";
-            Jimmy.LastName = "Smith";
+            Jimmy.LastName = "Smith";            
 
             RegisterStudent(Jimmy, Software);
+            RegisterStudent(Tim, Software);
             Console.WriteLine(Software.GetStudentInCourse(Jimmy.StudentId).FirstName);
             Console.WriteLine(Jimmy.Course.Title);
             DeregisterStudent(Jimmy, Software);
+            Console.WriteLine();
+            
 
             // a course can have many students in it
             // and a student can take one course
@@ -46,6 +52,12 @@ namespace SchoolManagementDemo
                     course.AddStudentToCourse(student);
                     student.Course = course;
                     student.RegistrationDate = DateTime.Now;
+                    student.setCourseGrade(0); // here for the sake of seeing the grade saved in Enrollment
+
+                    // enrollment stores all the values as its own class
+                    Enrolment enrolment = new Enrolment(student, student.StudentId, course);
+                    Enrolments.Add(enrolment);
+                    student.setEnrolment(student);
                 }
                 else
                 {
@@ -56,6 +68,8 @@ namespace SchoolManagementDemo
 
             void DeregisterStudent(Student student, Course course)
             {
+                // dereference Course from Student
+                // enrolment hashset still retains all enrolment objects and references
                 course.RemoveStudentFromCourse(student);
                 student.RegistrationDate = null;
             }
