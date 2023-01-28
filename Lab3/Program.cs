@@ -45,6 +45,7 @@ namespace SchoolManagementDemo
                     // set the course as the student's currently registered course
                     course.AddStudentToCourse(student);
                     student.Course = course;
+                    student.RegistrationDate = DateTime.Now;
                 }
                 else
                 {
@@ -56,6 +57,7 @@ namespace SchoolManagementDemo
             void DeregisterStudent(Student student, Course course)
             {
                 course.RemoveStudentFromCourse(student);
+                student.RegistrationDate = null;
             }
         }
     }

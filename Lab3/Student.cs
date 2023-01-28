@@ -55,8 +55,36 @@ namespace SchoolManagementDemo
         // many students can each take one course
         public Course Course { get; set; }
 
+        private int? _courseGrade;
 
+        public int? CourseGrade { get { return _courseGrade; } }
+        public void setCourseGrade(int grade)
+        {
+            if (Course == null )
+            {
+                throw new Exception("Student not enrolled in any course");
+            }
+            else if (grade < 0 || grade > 100)
+            {
+                throw new Exception("Grade must be between 0 and 100");
+            }
+            else
+            {
+                _courseGrade = grade;
+            }
+        }
 
+        public void RemoveGrade()
+        {
+            _courseGrade = null;
+        }
+
+        private DateTime? _registrationDate;
+        public DateTime? RegistrationDate 
+        { 
+            get { return _registrationDate; }
+            set { _registrationDate = value; }
+        }
 
         // *** CONSTRUCTORS ***
         public Student(int studentId)

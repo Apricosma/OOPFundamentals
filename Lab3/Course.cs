@@ -79,6 +79,7 @@ namespace SchoolManagementDemo
                     Console.WriteLine($"{s.FirstName} {s.LastName} removed from {Title}");
                     _students.Remove(s);
                     student.Course = null;
+                    student.RemoveGrade();
                     return;
                 } else
                 {
